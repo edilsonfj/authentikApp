@@ -1,0 +1,8 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@font-face {
+    font-family: 'Oceanwide';
+    src: url('../fonts/Oceanwide.woff2') format('woff2');
+};
