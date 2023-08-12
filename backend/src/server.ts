@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { router } from "./routes";
+import "./database/prisma";
 require("dotenv").config();
 
 const PORT = process.env.PORT;
