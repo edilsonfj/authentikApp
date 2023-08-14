@@ -1,4 +1,4 @@
-import { Logo } from "./items";
+import { Box, Logo, Title, ButtonThin } from "./items";
 
 export function Wrapper() {
 
@@ -11,6 +11,16 @@ export function Wrapper() {
     return (
         <div className={`${screen} ${desktop} ${laptop} ${tablet} ${mobile}`}>
             <Logo href="/">Authentik.App</Logo>
+            <Box>
+                <Title>
+                    <Title.On>Hi there!</Title.On>
+                    <Title.Sub>Welcome to Authentik App</Title.Sub>
+                </Title>
+                <ButtonThin href="/register">
+                    <ButtonThin.Icon bg='bg-rocket' />
+                    <ButtonThin.Label>Register now</ButtonThin.Label>
+                </ButtonThin>
+            </Box>
         </div>
     );
 };

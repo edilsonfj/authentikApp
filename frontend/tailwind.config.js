@@ -15,6 +15,9 @@ export default {
         'tablet': { 'max': '767px' },
         'mobile': { 'max': '429px' },
       },
+      spacing: {
+        '100': '25rem',
+      },
       backgroundImage: {
         'astroOne': "url('./src/assets/astroOne.png')",
         'astroTwo': "url('./src/assets/astroTwo.png')",
