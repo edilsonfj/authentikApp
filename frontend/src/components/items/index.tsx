@@ -5,3 +5,4 @@ export { ButtonThin } from './button-thin';
 export { ButtonFill } from './button-fill';
 export { Divider } from './divider';
 export { Form } from './form';
+export { Nick } from './nick';
