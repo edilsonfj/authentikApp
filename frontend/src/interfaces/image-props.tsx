@@ -1,3 +1,4 @@
 export interface ImageProps {
-    bg: string;
+    bg?: string;
+    bgImg?: string;
 };

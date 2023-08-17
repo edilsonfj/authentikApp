@@ -9,7 +9,7 @@ export function Register() {
 
     return (
         <div className={`${screen} ${desktop} ${laptop} ${tablet} ${mobile}`}>
-            <Banner bg="bg-astroTwo" />
+            <Banner bgImg="bg-astroTwo" />
             <Content />
         </div>
     );

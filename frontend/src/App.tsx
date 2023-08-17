@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Home, Register, Profile } from './pages';
+import { Home, Register, Profile, Notfound } from './pages';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/about" element={<h1>About</h1>} />
-        <Route path="*" element={<h1>404 - Page not fould</h1>} />
+        <Route path="*" element={<Notfound />} />
       </Routes>
     </Router>
   )

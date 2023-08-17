@@ -10,7 +10,7 @@ export function Profile() {
     return (
         <div className={`${screen} ${desktop} ${laptop} ${tablet} ${mobile}`}>
             <Account />
-            <Banner bg="bg-astroOne" />
+            <Banner bgImg="bg-astroOne" />
         </div>
     );
 };

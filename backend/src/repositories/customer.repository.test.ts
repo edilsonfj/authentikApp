@@ -17,3 +17,73 @@ test('CustomerRepository.create should create a new customer', async () => {
 
     expect(createdCustomer).toBeInstanceOf(Customer);
 });
+
+test('CustomerRepository.findByEmail should return a customer', async () => {
+    const customerDTO: CustomerDTO = {
+        name: 'John Doe',
+        phone: '1234567890',
+        email: 'johndoe@example.com',
+        password: 'password123',
+    };
+
+    const customerRepository = new CustomerRepository();
+
+    const createdCustomer = await customerRepository.create(customerDTO);
+
+    const foundCustomer = await customerRepository.findByEmail(customerDTO.email);
+
+    expect(foundCustomer).toBeInstanceOf(Customer);
+});
+
+test('CustomerRepository.findById should return a customer', async () => {
+    const customerDTO: CustomerDTO = {
+        name: 'John Doe',
+        phone: '1234567890',
+        email: 'johndoe@example.com',
+        password: 'password123',
+    };
+
+    const customerRepository = new CustomerRepository();
+
+    const createdCustomer = await customerRepository.create(customerDTO);
+
+    const foundCustomer = await customerRepository.findById(createdCustomer.id);
+
+    expect(foundCustomer).toBeInstanceOf(Customer);
+});
+
+test('CustomerRepository.update should update a customer', async () => {
+    const customerDTO: CustomerDTO = {
+        name: 'John Doe',
+        phone: '1234567890',
+        email: 'johndoe@example.com',
+        password: 'password123',
+    };
+
+    const customerRepository = new CustomerRepository();
+
+    const createdCustomer = await customerRepository.create(customerDTO);
+
+    const updatedCustomer = await customerRepository.update(createdCustomer);
+
+    expect(updatedCustomer).toBeInstanceOf(Customer);
+});
+
+test('CustomerRepository.delete should delete a customer', async () => {
+    const customerDTO: CustomerDTO = {
+        name: 'John Doe',
+        phone: '1234567890',
+        email: 'johndoe@example.com',
+        password: 'password123',
+    };
+
+    const customerRepository = new CustomerRepository();
+
+    const createdCustomer = await customerRepository.create(customerDTO);
+
+    await customerRepository.delete(createdCustomer.id);
+
+    const foundCustomer = await customerRepository.findById(createdCustomer.id);
+
+    expect(foundCustomer).toBeNull();
+});
