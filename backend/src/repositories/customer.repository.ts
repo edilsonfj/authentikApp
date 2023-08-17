@@ -42,7 +42,7 @@ export class CustomerRepository {
             });
             return createdCustomer;
         }
-    }
+    };
 
     async findByEmail(email: string): Promise<Customer | null> {
         if (process.env.NODE_ENV === 'test') {
@@ -55,7 +55,7 @@ export class CustomerRepository {
             });
             return customer;
         }
-    }
+    };
 
     async findById(id: string): Promise<Customer | null> {
         if (process.env.NODE_ENV === 'test') {
@@ -68,15 +68,15 @@ export class CustomerRepository {
             });
             return customer;
         }
-    }
+    };
 
-    async update(customer: Customer): Promise<Customer> {
+    async update(id: string, customer: Customer): Promise<Customer> {
         if (process.env.NODE_ENV === 'test') {
-            return this.customerRepositoryMemory.update(customer);
+            return this.customerRepositoryMemory.update(id, customer);
         } else {
             const updatedCustomer = await this.customerRepositoryDatabase.customer.update({
                 where: {
-                    id: customer.id
+                    id: id
                 },
                 data: {
                     name: customer.name,
@@ -88,7 +88,8 @@ export class CustomerRepository {
             });
             return updatedCustomer;
         }
-    }
+
+    };
 
     async delete(id: string): Promise<void> {
         if (process.env.NODE_ENV === 'test') {
@@ -100,6 +101,6 @@ export class CustomerRepository {
                 }
             });
         }
-    }
+    };
 
 };
