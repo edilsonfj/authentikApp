@@ -64,10 +64,11 @@ test('CustomerRepository.update should update a customer', async () => {
 
     const createdCustomer = await customerRepository.create(customerDTO);
 
-    const updatedCustomer = await customerRepository.update(createdCustomer);
+    const updatedCustomer = await customerRepository.update(createdCustomer.id, { ...createdCustomer, name: 'Jane Doe' });
 
-    expect(updatedCustomer).toBeInstanceOf(Customer);
+    expect(updatedCustomer.name).toBe('Jane Doe');
 });
+
 
 test('CustomerRepository.delete should delete a customer', async () => {
     const customerDTO: CustomerDTO = {
