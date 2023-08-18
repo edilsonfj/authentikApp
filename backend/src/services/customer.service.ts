@@ -10,34 +10,58 @@ export class CustomerService {
     };
 
     async createCustomer(customerData: CustomerDTO): Promise<Customer | String> {
+        const customerExists = await this.customerRepository.findByEmail(customerData.email);
 
-        await this.customerRepository.create(customerData);
+        if (customerExists) {
+            return ('Cliente já cadastrado!');
+        };
 
-        return ('Cliente cadastrado com sucesso!');
-    };
-
-    async findByEmail(email: string): Promise<Customer | null> {
-        const customer = await this.customerRepository.findByEmail(email);
+        const customer = await this.customerRepository.create(customerData);
 
         return customer;
     };
 
-    async findById(id: string): Promise<Customer | null> {
+    async findCustomerByEmail(email: string): Promise<Customer | String> {
+        const customer = await this.customerRepository.findByEmail(email);
+
+        if (!customer) {
+            return ('Cliente não encontrado!');
+        };
+
+        return customer;
+    };
+
+    async findCustomerById(id: string): Promise<Customer | String> {
         const customer = await this.customerRepository.findById(id);
+
+        if (!customer) {
+            return ('Cliente não encontrado!');
+        };
 
         return customer;
     };
 
     async updateCustomer(id: string, customerData: Customer): Promise<Customer | String> {
+        const customerExists = await this.customerRepository.findById(id);
+
+        if (!customerExists) {
+            return ('Cliente não encontrado!');
+        };
+
         await this.customerRepository.update(id, customerData);
 
         return ('Cliente atualizado com sucesso!');
     };
 
     async deleteCustomer(id: string): Promise<void | String> {
+        const customerExists = await this.customerRepository.findById(id);
+
+        if (!customerExists) {
+            return ('Cliente não encontrado!');
+        };
+
         await this.customerRepository.delete(id);
 
         return ('Cliente deletado com sucesso!');
     };
-
 };

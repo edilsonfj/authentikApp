@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest';
-import { CustomerRepository } from './customer.repository';
-import { CustomerDTO } from '../dtos';
 import { Customer } from '../entities';
+import { CustomerDTO } from '../dtos';
+import { CustomerRepository } from './customer.repository';
 
 test('CustomerRepository.create should create a new customer', async () => {
     const customerDTO: CustomerDTO = {
@@ -30,7 +30,7 @@ test('CustomerRepository.findByEmail should return a customer', async () => {
 
     const createdCustomer = await customerRepository.create(customerDTO);
 
-    const foundCustomer = await customerRepository.findByEmail(customerDTO.email);
+    const foundCustomer = await customerRepository.findByEmail(createdCustomer.email);
 
     expect(foundCustomer).toBeInstanceOf(Customer);
 });
