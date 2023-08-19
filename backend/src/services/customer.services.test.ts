@@ -4,142 +4,155 @@ import { CustomerDTO } from '../dtos';
 import { CustomerRepository } from '../repositories';
 import { CustomerService } from './customer.service';
 
-test('CustomerService.createCustomer should create a new customer', async () => {
-    const customerDTO: CustomerDTO = {
-        name: 'John Doe',
-        phone: '1234567890',
-        email: 'johndoe@example.com',
-        password: 'password123',
-    };
+test('CustomerService', () => {
 
-    const customerRepository = new CustomerRepository();
+    test('createCustomer', () => {
+        test('CustomerService.createCustomer should create a new customer', async () => {
+            const customerDTO: CustomerDTO = {
+                name: 'John Doe',
+                phone: '1234567890',
+                email: 'johndoe@example.com',
+                password: 'password123',
+            };
 
-    const customerService = new CustomerService(customerRepository);
+            const customerRepository = new CustomerRepository();
 
-    const createdCustomer = await customerService.createCustomer(customerDTO);
+            const customerService = new CustomerService(customerRepository);
 
-    expect(createdCustomer).toBeInstanceOf(Customer);
-});
+            const createdCustomer = await customerService.createCustomer(customerDTO);
 
-test('CustomerService.createCustomer should return error message for existing customer', async () => {
-    const customerDTO: CustomerDTO = {
-        name: 'John Doe',
-        phone: '1234567890',
-        email: 'johndoe@example.com',
-        password: 'password123',
-    };
+            expect(createdCustomer).toBeInstanceOf(Customer);
+        });
 
-    const existingCustomerDTO: CustomerDTO = {
-        name: 'John Doe',
-        phone: '1234567890',
-        email: 'johndoe@example.com',
-        password: 'password123',
-    };
+        test('CustomerService.createCustomer should return error message for existing customer', async () => {
+            const customerDTO: CustomerDTO = {
+                name: 'John Doe',
+                phone: '1234567890',
+                email: 'johndoe@example.com',
+                password: 'password123',
+            };
 
-    const customerRepository = new CustomerRepository();
+            const existingCustomerDTO: CustomerDTO = {
+                name: 'John Doe',
+                phone: '1234567890',
+                email: 'johndoe@example.com',
+                password: 'password123',
+            };
 
-    const customerService = new CustomerService(customerRepository);
+            const customerRepository = new CustomerRepository();
 
-    await customerService.createCustomer(customerDTO);
+            const customerService = new CustomerService(customerRepository);
 
-    const errorMessage = await customerService.createCustomer(existingCustomerDTO);
+            await customerService.createCustomer(customerDTO);
 
-    expect(errorMessage).toBe('Cliente já cadastrado!');
-});
+            const errorMessage = await customerService.createCustomer(existingCustomerDTO);
 
-test('CustomerService.findCustomerByEmail should return a customer', async () => {
-    const customerDTO: CustomerDTO = {
-        name: 'John Doe',
-        phone: '1234567890',
-        email: 'johndoe@example.com',
-        password: 'password123',
-    };
+            expect(errorMessage).toBe('Cliente já cadastrado!');
+        });
+    });
 
-    const customerRepository = new CustomerRepository();
+    test('findCustomerByEmail', () => {
+        test('CustomerService.findCustomerByEmail should return a customer', async () => {
+            const customerDTO: CustomerDTO = {
+                name: 'John Doe',
+                phone: '1234567890',
+                email: 'johndoe@example.com',
+                password: 'password123',
+            };
 
-    const customerService = new CustomerService(customerRepository);
+            const customerRepository = new CustomerRepository();
 
-    const createdCustomer = await customerService.createCustomer(customerDTO);
+            const customerService = new CustomerService(customerRepository);
 
-    const foundCustomer = await customerService.findCustomerByEmail(createdCustomer.email);
+            const createdCustomer = await customerService.createCustomer(customerDTO);
 
-    expect(foundCustomer).toBeInstanceOf(Customer);
-});
+            const foundCustomer = await customerService.findCustomerByEmail(createdCustomer.email);
 
-test('CustomerService.findCustomerByEmail should return error message for non-existing customer by email', async () => {
-    const customerRepository = new CustomerRepository();
+            expect(foundCustomer).toBeInstanceOf(Customer);
+        });
 
-    const customerService = new CustomerService(customerRepository);
+        test('CustomerService.findCustomerByEmail should return error message for non-existing customer by email', async () => {
+            const customerRepository = new CustomerRepository();
 
-    const errorMessage = await customerService.findCustomerByEmail('johndoe@example.com');
+            const customerService = new CustomerService(customerRepository);
 
-    expect(errorMessage).toBe('Cliente não encontrado!');
-});
+            const errorMessage = await customerService.findCustomerByEmail('johndoe@example.com');
 
-test('CustomerService.findCustomerById should return a string', async () => {
-    const customerDTO = {
-        name: 'John Doe',
-        phone: '1234567890',
-        email: 'johndoe@example.com',
-        password: 'password123',
-    };
+            expect(errorMessage).toBe('Cliente não encontrado!');
+        });
+    });
 
-    const customerRepository = new CustomerRepository();
+    test('findCustomerById', () => {
+        test('CustomerService.findCustomerById should return a string', async () => {
+            const customerDTO = {
+                name: 'John Doe',
+                phone: '1234567890',
+                email: 'johndoe@example.com',
+                password: 'password123',
+            };
 
-    const customerService = new CustomerService(customerRepository);
+            const customerRepository = new CustomerRepository();
 
-    const createdCustomer = await customerService.createCustomer(customerDTO);
+            const customerService = new CustomerService(customerRepository);
 
-    const foundCustomer = await customerService.findCustomerById(createdCustomer.id);
+            const createdCustomer = await customerService.createCustomer(customerDTO);
 
-    expect(foundCustomer).toBeInstanceOf(Customer);
-});
+            const foundCustomer = await customerService.findCustomerById(createdCustomer.id);
 
-test('CustomerService.updateCustomer should update a customer', async () => {
-    const customerDTO = {
-        name: 'John Doe',
-        phone: '1234567890',
-        email: 'johndoe@example.com',
-        password: 'password123',
-    };
+            expect(foundCustomer).toBeInstanceOf(Customer);
+        });
 
-    const customerRepository = new CustomerRepository();
+        test('CustomerService.updateCustomer should update a customer', async () => {
+            const customerDTO = {
+                name: 'John Doe',
+                phone: '1234567890',
+                email: 'johndoe@example.com',
+                password: 'password123',
+            };
 
-    const customerService = new CustomerService(customerRepository);
+            const customerRepository = new CustomerRepository();
 
-    const createdCustomer = await customerService.createCustomer(customerDTO);
+            const customerService = new CustomerService(customerRepository);
 
-    const updatedCustomer = await customerService.updateCustomer(createdCustomer.id, { ...createdCustomer, name: 'Jane Doe' });
+            const createdCustomer = await customerService.createCustomer(customerDTO);
 
-    expect(updatedCustomer).toBe('Cliente atualizado com sucesso!');
-});
+            const updatedCustomer = await customerService.updateCustomer(createdCustomer.id, { ...createdCustomer, name: 'Jane Doe' });
 
-test('CustomerService.updateCustomer should return error message for non-existing customer by id', async () => {
-    const customerRepository = new CustomerRepository();
+            expect(updatedCustomer).toBe('Cliente atualizado com sucesso!');
+        });
+    });
 
-    const customerService = new CustomerService(customerRepository);
+    test('updateCustomer', () => {
+        test('CustomerService.updateCustomer should return error message for non-existing customer by id', async () => {
+            const customerRepository = new CustomerRepository();
 
-    const errorMessage = await customerService.findCustomerById('1234567890');
+            const customerService = new CustomerService(customerRepository);
 
-    expect(errorMessage).toBe('Cliente não encontrado!');
-});
+            const errorMessage = await customerService.findCustomerById('1234567890');
 
+            expect(errorMessage).toBe('Cliente não encontrado!');
+        });
+    });
 
-test('CustomerService.deleteCustomer should delete a customer', async () => {
-    const customerDTO = {
-        name: 'John Doe',
-        phone: '1234567890',
-        email: 'johndoe@example.com',
-        password: 'password123',
-    };
+    test('deleteCustomer', () => {
+        test('CustomerService.deleteCustomer should delete a customer', async () => {
+            const customerDTO = {
+                name: 'John Doe',
+                phone: '1234567890',
+                email: 'johndoe@example.com',
+                password: 'password123',
+            };
 
-    const customerRepository = new CustomerRepository();
+            const customerRepository = new CustomerRepository();
 
-    const customerService = new CustomerService(customerRepository);
+            const customerService = new CustomerService(customerRepository);
 
-    const createdCustomer = await customerService.createCustomer(customerDTO);
+            const createdCustomer = await customerService.createCustomer(customerDTO);
 
-    const deletedCustomer = await customerService.deleteCustomer(createdCustomer.id);
+            const deletedCustomer = await customerService.deleteCustomer(createdCustomer.id);
 
-    expect(deletedCustomer).toBe('Cliente deletado com sucesso!');
+            expect(deletedCustomer).toBe('Cliente deletado com sucesso!');
+        });
+    });
+
 });

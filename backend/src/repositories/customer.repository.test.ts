@@ -3,88 +3,92 @@ import { Customer } from '../entities';
 import { CustomerDTO } from '../dtos';
 import { CustomerRepository } from './customer.repository';
 
-test('CustomerRepository.create should create a new customer', async () => {
-    const customerDTO: CustomerDTO = {
-        name: 'John Doe',
-        phone: '1234567890',
-        email: 'johndoe@example.com',
-        password: 'password123',
-    };
+test('CustomerRepository', () => {
 
-    const customerRepository = new CustomerRepository();
+    test('Create should create a new customer', async () => {
+        const customerDTO: CustomerDTO = {
+            name: 'John Doe',
+            phone: '1234567890',
+            email: 'johndoe@example.com',
+            password: 'password123',
+        };
 
-    const createdCustomer = await customerRepository.create(customerDTO);
+        const customerRepository = new CustomerRepository();
 
-    expect(createdCustomer).toBeInstanceOf(Customer);
-});
+        const createdCustomer = await customerRepository.create(customerDTO);
 
-test('CustomerRepository.findByEmail should return a customer', async () => {
-    const customerDTO: CustomerDTO = {
-        name: 'John Doe',
-        phone: '1234567890',
-        email: 'johndoe@example.com',
-        password: 'password123',
-    };
+        expect(createdCustomer).toBeInstanceOf(Customer);
+    });
 
-    const customerRepository = new CustomerRepository();
+    test('FindByEmail should return a customer', async () => {
+        const customerDTO: CustomerDTO = {
+            name: 'John Doe',
+            phone: '1234567890',
+            email: 'johndoe@example.com',
+            password: 'password123',
+        };
 
-    const createdCustomer = await customerRepository.create(customerDTO);
+        const customerRepository = new CustomerRepository();
 
-    const foundCustomer = await customerRepository.findByEmail(createdCustomer.email);
+        const createdCustomer = await customerRepository.create(customerDTO);
 
-    expect(foundCustomer).toBeInstanceOf(Customer);
-});
+        const foundCustomer = await customerRepository.findByEmail(createdCustomer.email);
 
-test('CustomerRepository.findById should return a customer', async () => {
-    const customerDTO: CustomerDTO = {
-        name: 'John Doe',
-        phone: '1234567890',
-        email: 'johndoe@example.com',
-        password: 'password123',
-    };
+        expect(foundCustomer).toBeInstanceOf(Customer);
+    });
 
-    const customerRepository = new CustomerRepository();
+    test('FindById should return a customer', async () => {
+        const customerDTO: CustomerDTO = {
+            name: 'John Doe',
+            phone: '1234567890',
+            email: 'johndoe@example.com',
+            password: 'password123',
+        };
 
-    const createdCustomer = await customerRepository.create(customerDTO);
+        const customerRepository = new CustomerRepository();
 
-    const foundCustomer = await customerRepository.findById(createdCustomer.id);
+        const createdCustomer = await customerRepository.create(customerDTO);
 
-    expect(foundCustomer).toBeInstanceOf(Customer);
-});
+        const foundCustomer = await customerRepository.findById(createdCustomer.id);
 
-test('CustomerRepository.update should update a customer', async () => {
-    const customerDTO: CustomerDTO = {
-        name: 'John Doe',
-        phone: '1234567890',
-        email: 'johndoe@example.com',
-        password: 'password123',
-    };
+        expect(foundCustomer).toBeInstanceOf(Customer);
+    });
 
-    const customerRepository = new CustomerRepository();
+    test('Update should update a customer', async () => {
+        const customerDTO: CustomerDTO = {
+            name: 'John Doe',
+            phone: '1234567890',
+            email: 'johndoe@example.com',
+            password: 'password123',
+        };
 
-    const createdCustomer = await customerRepository.create(customerDTO);
+        const customerRepository = new CustomerRepository();
 
-    const updatedCustomer = await customerRepository.update(createdCustomer.id, { ...createdCustomer, name: 'Jane Doe' });
+        const createdCustomer = await customerRepository.create(customerDTO);
 
-    expect(updatedCustomer.name).toBe('Jane Doe');
-});
+        const updatedCustomer = await customerRepository.update(createdCustomer.id, { ...createdCustomer, name: 'Jane Doe' });
+
+        expect(updatedCustomer.name).toBe('Jane Doe');
+    });
 
 
-test('CustomerRepository.delete should delete a customer', async () => {
-    const customerDTO: CustomerDTO = {
-        name: 'John Doe',
-        phone: '1234567890',
-        email: 'johndoe@example.com',
-        password: 'password123',
-    };
+    test('Delete should delete a customer', async () => {
+        const customerDTO: CustomerDTO = {
+            name: 'John Doe',
+            phone: '1234567890',
+            email: 'johndoe@example.com',
+            password: 'password123',
+        };
 
-    const customerRepository = new CustomerRepository();
+        const customerRepository = new CustomerRepository();
 
-    const createdCustomer = await customerRepository.create(customerDTO);
+        const createdCustomer = await customerRepository.create(customerDTO);
 
-    await customerRepository.delete(createdCustomer.id);
+        await customerRepository.delete(createdCustomer.id);
 
-    const foundCustomer = await customerRepository.findById(createdCustomer.id);
+        const foundCustomer = await customerRepository.findById(createdCustomer.id);
 
-    expect(foundCustomer).toBeNull();
+        expect(foundCustomer).toBeNull();
+    });
+
 });

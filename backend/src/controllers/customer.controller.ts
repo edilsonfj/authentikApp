@@ -21,4 +21,45 @@ export class CustomerController {
             return res.status(500).send({ 'Erro inesperado.': error });
         }
     };
+
+    async getCustomersByEmail(req: Request, res: Response): Promise<Response> {
+        try {
+            const email = req.body;
+            const result = await this.customerService.findCustomerByEmail(email);
+            return res.status(200).send(result);
+        } catch (error) {
+            return res.status(500).send({ 'Erro inesperado.': error });
+        }
+    };
+
+    async getCustomerById(req: Request, res: Response): Promise<Response> {
+        try {
+            const id = req.body;
+            const result = await this.customerService.findCustomerById(id);
+            return res.status(200).send(result);
+        } catch (error) {
+            return res.status(500).send({ 'Erro inesperado.': error });
+        }
+    };
+
+    async updateCustomer(req: Request, res: Response): Promise<Response> {
+        try {
+            const id = req.body;
+            const result = await this.customerService.updateCustomer(id.id, id);
+            return res.status(200).send(result);
+        } catch (error) {
+            return res.status(500).send({ 'Erro inesperado.': error });
+        }
+    };
+
+    async deleteCustomer(req: Request, res: Response): Promise<Response> {
+        try {
+            const id = req.body;
+            const result = await this.customerService.deleteCustomer(id);
+            return res.status(200).send(result);
+        } catch (error) {
+            return res.status(500).send({ 'Erro inesperado.': error });
+        }
+    };
+
 };

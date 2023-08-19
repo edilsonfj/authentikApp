@@ -53,25 +53,13 @@ export class CustomerService {
         return ('Cliente atualizado com sucesso!');
     };
 
-    async findByEmail(email: string): Promise<Customer | null> {
-        const customer = await this.customerRepository.findByEmail(email);
-
-        return customer;
-    };
-
-    async findById(id: string): Promise<Customer | null> {
-        const customer = await this.customerRepository.findById(id);
-
-        return customer;
-    };
-
-    async updateCustomer(id: string, customerData: Customer): Promise<Customer | String> {
-        await this.customerRepository.update(id, customerData);
-
-        return ('Cliente atualizado com sucesso!');
-    };
-
     async deleteCustomer(id: string): Promise<void | String> {
+        const customerExists = await this.customerRepository.findById(id);
+
+        if (!customerExists) {
+            return ('Cliente não encontrado!');
+        };
+
         await this.customerRepository.delete(id);
 
         return ('Cliente deletado com sucesso!');
